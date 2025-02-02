@@ -9,17 +9,16 @@
     </head>
     <body>
         <div class="PageContainer">
-            <a id="btnMenuAdmin" href="/admin">Admin</a>
+            <a id="btnMenuAdmin" href="/admin/adminhome.ejs">Admin</a>
             <div id="navBarMenu">
-                <% const navigationLinks = [{text: 'Home', href: '/'},{text: 'Flash Cards', href: '/flashcards'},{text: 'Quiz Park', href: '/quiz'}, {text: 'Facts Checker', href: '/fact'}]; %>
-                
+                <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: 'admin/flashcards'},{text: 'Quiz Park', href: 'admin/quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
                 <% navigationLinks.forEach((lnk) => { %>
                     <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
                 <% }); %>
                 
             </div>
-
-            <h1 class="title">Welcome to KB-BANK</h1>
+            <h1 class="title">Welcome to KB-BANK <h1>
+                <h3> Admin Control Panel</h3>
         </div>
 
         <script>

@@ -49,3 +49,19 @@
     cursor: pointer !important;
     color: gold !important;
 }
+
+.addImageIcon{
+    height: 50px;
+    width: 50px;
+}
+.addNew{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+.addNewTitle{
+    /* margin-left: 30px; */
+}

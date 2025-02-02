@@ -30,7 +30,45 @@ app.use(morgan("dev")); // morgan logs status of processed requests in our conso
 app.get("/", async (req, res) => {
     res.render("home.ejs")
 });
+app.get("/flashcards", async (req, res) => {
+    res.render("home.ejs")
+});
+app.get("/quiz", async (req, res) => {
+    res.render("home.ejs")
+});
+app.get("/fact", async (req, res) => {
+    res.render("home.ejs")
+});
 
+//******************************************************* */
+// ADMIN ROUTES - Admin dashboard routes.
+
+app.get("/admin", async (req, res) => {
+    console.log(`Welcome to Admin Page`);
+    res.render("admin/home.ejs")
+});
+
+
+app.get("/admin/fact", async (req, res) => {
+    console.log(`Welcome to Admin Page`);
+    res.render("admin/home.ejs")
+});
+
+app.get("/admin/quiz", async (req, res) => {
+    console.log(`Welcome to Admin Page`);
+    res.render("admin/quiz/index.ejs")
+});
+
+app.get("/admin/flashcards", async (req, res) => {
+    console.log(`Welcome to Admin Page`);
+    res.render("admin/flashcards/index.ejs")
+});
+
+
+app.get("/admin/flashcards/new", async (req, res) => {
+    // console.log(`Welcome to Admin Page`);
+    res.render("admin/flashcards/new.ejs")
+});
 // INDEX BOOK ROUTE - Renders a page with a list of our book collection
 
 // NEW BOOK ROUTE - Renders form for user to enter new book data.
