@@ -4,18 +4,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create a Book</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Create a Quiz</title>
 </head>
 
 <body>
-  <h1>Create a New Flash Card Data!</h1>
+    <div class="PageContainer">
+        <a id="btnMenuAdmin" href="/admin">Admin</a>
+        <div id="navBarMenu">
+            <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: 'flashcards'},{text: 'Quiz Park', href: 'quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
+            <% navigationLinks.forEach((lnk) => { %>
+                <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
+            <% }); %>
+            
+        </div>
+  <h1>Create a New Quiz Data!</h1>
 
-  <form action="/flashcards" method="POST">
-    <label for="name">Question:</label>
-    <input type="text" name="question" id="question" />
+  <form action="/admin/quiz"  id="quizForm" method="POST">
+    <label for="question">Question:</label><br>
+    <input type="text" id="question" name="question" required><br><br>
+    <div>
+      <!-- <label>Answer:</label><br> -->
+    <label>Options:</label><br>
+  </div>
+    <div id="optionsContainer">
+        <div>
+            <input type="radio" name="answerIndex" value="0" required> 
+            <input type="text" name="options1" required>
+        </div>
+        <div>
+            <input type="radio" name="answerIndex" value="1" required> 
+            <input type="text" name="options2" required>
+        </div>
+        <div>
+            <input type="radio" name="answerIndex" value="2"> 
+            <input type="text" name="options3">
+        </div>
+        <div>
+            <input type="radio" name="answerIndex" value="3"> 
+            <input type="text" name="options4">
+        </div>
+        <input type="hidden" name="answers" value="options">
+    </div>
 
-    <label for="author">Answer:</label>
-    <input type="text" name="answer" id="answer" />
+    <br>
 
     <button type="submit">Save Question</button>
   </form>

@@ -7,6 +7,8 @@ const morgan = require("morgan");
 require('dotenv').config();
 const path = require('path');
 const FlashCard = require('./models/flashcard.js');
+const Quiz = require('./models/quiz.js');
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -63,7 +65,22 @@ app.get("/admin/quiz", async (req, res) => {
     console.log(`Welcome to Admin Page`);
     res.render("admin/quiz/index.ejs")
 });
-
+app.get("/admin/quiz/new", async (req, res) => {
+    console.log(`Welcome to Quiz Admin Page`);
+    res.render("admin/quiz/new.ejs")
+});
+app.post("/admin/quiz", async (req, res) => {
+    console.log(`Adding New Quiz Question`,req.body);  
+    const { question,
+        
+         answerIndex } = req.body;
+    const myOptions = [req.body.options1,req.body.options2,req.body.options3,req.body.options4 ];
+    console.log('My Options Array',myOptions);
+    const newQuiz = new Quiz({ question,options: myOptions, answerIndex });
+    console.log(`Adding New Quiz Question, ${newQuiz}`);
+    await Quiz.create(newQuiz);
+    res.redirect("../../admin/Quiz")
+})
 
 
 
