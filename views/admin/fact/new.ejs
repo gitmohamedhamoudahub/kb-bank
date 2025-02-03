@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Create a Quiz</title>
+</head>
+
+<body>
+    <div class="PageContainer">
+        <a id="btnMenuAdmin" href="/admin">Admin</a>
+        <div id="navBarMenu">
+            <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: 'flashcards'},{text: 'Quiz Park', href: 'quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
+            <% navigationLinks.forEach((lnk) => { %>
+                <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
+            <% }); %>
+            
+        </div>
+  <h1>Create a New Quiz Data!</h1>
+
+  <form action="/admin/fact"  id="factForm" method="POST">
+    <label for="fact">Fact:</label><br>
+    <input type="text" id="fact" name="fact" required><br><br>
+    <div>
+      <!-- <label>Answer:</label><br> -->
+    <label>Options:</label><br>
+  </div>
+    <div id="optionsContainer">
+        <div>
+            <input type="radio" name="isTrue"  value="1" required> 
+            <label for="fact">True</label>
+        </div>
+        <div>
+            <input type="radio" name="isTrue" value="0" required> 
+            <label for="fact">False</label>
+        </div>
+        
+
+    <br>
+
+    <button type="submit">Save Fact</button>
+  </form>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>KB-BANK</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+            
+            <div class="PageContainer">
+                <a id="btnMenuAdmin" href="/admin">Admin</a>
+                <div id="navBarMenu">
+                    <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: 'flashcards'},{text: 'Quiz Park', href: 'quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
+                    <% navigationLinks.forEach((lnk) => { %>
+                        <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
+                    <% }); %>
+                    
+                </div>
+                <h1 class="title">Welcome to KB-BANK <h1>
+                    <h3> Admin Control Panel - Fact Cards</h3>
+                    
+                    <div class="addNew">
+                        <div class="link">
+                    <a href="/admin/fact/new">
+                        <img src="../images/add.jpg" alt="Add New Fact Data" class="addImageIcon">
+                       
+                    </a>
+                </div>
+                <div class="addNewTitle">
+                    <h4>Add New</h4>
+                </div>
+                <h1>All Quiz</h1>
+                
+                </div>
+            
+                <ul>
+                     <% fact.forEach(card=> { %>
+                        <div class="questionSection">
+                            <!-- <a href="/flashcards/<%= card._id %>"> -->
+                               <div class="questionHeader"> <%= card.fact %></div>
+                                <div class="questionAnswer"><%=card.isTrue %>  
+                                </div>
+                                <div class="controlSection">
+                                    <div>
+                                        <form action="/admin/fact/<%=card._id%>/edit" method="GET">  
+                                        <button type="submit" >Edit</button>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        
+                                      <form action="/admin/fact/<%=card._id%>?_method=DELETE" method="POST">
+                                        <button type="submit" href="#">Delete</button></form></div>
+                                      </form>
+                                </div>
+                            <!-- </a> -->
+                        </div>
+                        <% }); %> 
+                </ul>
+            </div>
+    
+            <script>
+                document.querySelectorAll('#btnMenu').forEach(button => {
+                    button.addEventListener('click', function() {
+                        console.log(button.textContent);
+                    });
+                });
+            </script>
+
+
+        </div>
+
+        <script>
+            document.querySelectorAll('#btnMenu').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log(button.textContent);
+                });
+            });
+        </script>    </body>
+</html>

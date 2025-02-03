@@ -8,6 +8,7 @@ require('dotenv').config();
 const path = require('path');
 const FlashCard = require('./models/flashcard.js');
 const Quiz = require('./models/quiz.js');
+const Fact = require('./models/fact.js');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -44,14 +45,59 @@ app.get("/admin", async (req, res) => {
 
 
 
-app.get("/fact", async (req, res) => {
-    res.render("home.ejs")
-});
+
+//FACT ROUTES
+//****************************************************************************************/
+
+
 
 app.get("/admin/fact", async (req, res) => {
-    console.log(`Welcome to Admin Page`);
-    res.render("admin/home.ejs")
+    console.log('Fact Index');
+    const allFacts = await Fact.find();
+    console.log(allFacts.length);
+    res.render("admin/fact/index.ejs", { fact: allFacts })
 });
+   
+app.get("/admin/fact/new", async (req, res) => {
+    console.log(`Welcome to fact Admin Page`);
+    res.render("admin/fact/new.ejs")
+});
+app.post("/admin/fact", async (req, res) => {
+    console.log(`Adding New Fact Question`,req.body);  
+    const { fact,isTrue } = req.body;
+    // const myOptions = [req.body.options1,req.body.options2,req.body.options3,req.body.options4 ];
+    // console.log('My Options Array',myOptions);
+    // let myBoolean = new Boolean(isTrue);
+    const newFact = new Fact({ fact, isTrue });
+    // console.log("is true = >",myBoolean);
+    console.log(`Adding New Fact Question, ${newFact}`);
+    await Fact.create(newFact);
+    res.redirect("../../admin/Fact")
+})
+
+app.get("/admin/fact/:cardId/edit", async (req, res) => {
+    console.log(`Editing Fact Question with ID: ${req.params.cardId}`);  // log the id of the card being edited.
+    const foundFact = await Fact.findById(req.params.cardId)
+    console.log(foundFact)
+    res.render("admin/fact/edit.ejs", {
+        fact: foundFact,
+    });
+});
+
+
+app.put("/admin/fact/:cardId", async (req, res) => {
+    console.log('Fact PUT Data',req.params);
+    await Fact.findByIdAndUpdate(req.params.cardId, req.body);
+    res.redirect("../../admin/fact")
+});
+
+app.delete("/admin/fact/:cardId", async (req, res) => {
+    console.log('DELETE Fact Data',req.params);
+    await Fact.findByIdAndDelete(req.params.cardId)
+    res.redirect("../../admin/fact")
+});
+
+
 
 
 //QUIZ ROUTES
@@ -95,7 +141,17 @@ app.get("/admin/quiz/:cardId/edit", async (req, res) => {
 });
 
 
+app.put("/admin/quiz/:cardId", async (req, res) => {
+    console.log('Quiz PUT Data',req.params);
+    await Quiz.findByIdAndUpdate(req.params.cardId, req.body);
+    res.redirect("../../admin/quiz")
+});
 
+app.delete("/admin/quiz/:cardId", async (req, res) => {
+    console.log('DELETE Quiz Data',req.params);
+    await Quiz.findByIdAndDelete(req.params.cardId)
+    res.redirect("../../admin/quiz")
+});
 
 
 
