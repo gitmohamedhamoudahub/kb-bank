@@ -8,18 +8,66 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <div class="PageContainer">
-            <a id="btnMenuAdmin" href="/admin">Admin</a>
-            <div id="navBarMenu">
-                <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: 'flashcards'},{text: 'Quiz Park', href: 'quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
-                <% navigationLinks.forEach((lnk) => { %>
-                    <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
-                <% }); %>
+            
+            <div class="PageContainer">
+                <a id="btnMenuAdmin" href="/admin">Admin</a>
+                <div id="navBarMenu">
+                    <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: 'flashcards'},{text: 'Quiz Park', href: 'quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
+                    <% navigationLinks.forEach((lnk) => { %>
+                        <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
+                    <% }); %>
+                    
+                </div>
+                <h1 class="title">Welcome to KB-BANK <h1>
+                    <h3> Admin Control Panel - Quiz Cards</h3>
+                    
+                    <div class="addNew">
+                        <div class="link">
+                    <a href="/admin/flashcards/new">
+                        <img src="../images/add.jpg" alt="Add New Quiz Data" class="addImageIcon">
+                       
+                    </a>
+                </div>
+                <div class="addNewTitle">
+                    <h4>Add New</h4>
+                </div>
+                <h1>All Quiz</h1>
                 
+                </div>
+            
+                <ul>
+                    <!-- <% quiz.forEach(card=> { %>
+                        <div class="questionSection">
+                            <!-- <a href="/flashcards/<%= card._id %>"> -->
+                               <!-- <div class="questionHeader"> <%= card.question %></div> -->
+                                <!-- <div class="questionAnswer"><%= card.options%></div> -->
+                                <div class="controlSection">
+                                    <div>
+                                        <form action="/admin/quiz/<%=card._id%>/edit" method="GET">  
+                                        <button type="submit" >Edit</button>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        
+                                      <form action="/admin/quiz/<%=card._id%>?_method=DELETE" method="POST">
+                                        <button type="submit" href="#">Delete</button></form></div>
+                                      </form>
+                                </div>
+                            <!-- </a> -->
+                        </div>
+                        <% }); %> -->
+                </ul>
             </div>
-            <h1 class="title">Welcome to KB-BANK <h1>
-                <h3> Admin Control Panel - Quiz</h3>
-                <a href="/admin/quiz/new">Add New Quiz Data</a>
+    
+            <script>
+                document.querySelectorAll('#btnMenu').forEach(button => {
+                    button.addEventListener('click', function() {
+                        console.log(button.textContent);
+                    });
+                });
+            </script>
+
+
         </div>
 
         <script>
@@ -28,6 +76,5 @@
                     console.log(button.textContent);
                 });
             });
-        </script>
-    </body>
+        </script>    </body>
 </html>

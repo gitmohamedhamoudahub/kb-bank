@@ -62,9 +62,10 @@ app.get("/quiz", async (req, res) => {
 });
 
 app.get("/admin/quiz", async (req, res) => {
-    console.log(`Welcome to Admin Page`);
-    res.render("admin/quiz/index.ejs")
-});
+    const allQuiz = await Quiz.find();
+    console.log(allQuiz.length);
+    res.render("admin/quiz/index.ejs", { quiz: allQuiz })
+   
 app.get("/admin/quiz/new", async (req, res) => {
     console.log(`Welcome to Quiz Admin Page`);
     res.render("admin/quiz/new.ejs")
