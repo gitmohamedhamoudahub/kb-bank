@@ -18,44 +18,21 @@
                 
             </div>
             <h1 class="title">Welcome to KB-BANK <h1>
-                <h3> Admin Control Panel - Flash Cards</h3>
-                
-                <div class="addNew">
-                    <div class="link">
-                <a href="/admin/flashcards/new">
-                    <img src="../images/add.jpg" alt="Add New Flash Card Data" class="addImageIcon">
-                   
-                </a>
-            </div>
-            <div class="addNewTitle">
-                <h4>Add New</h4>
-            </div>
             <h1>All Flash Cards</h1>
             
-            </div>
-        
             <ul>
                 <% flashcards.forEach(card=> { %>
                     <div class="questionSection">
                         <!-- <a href="/flashcards/<%= card._id %>"> -->
                            <div class="questionHeader"> <%= card.category + ' - ' + card.question %></div>
                             <div class="questionAnswer"><%= card.answer %></div>
-                            <div class="controlSection">
-                                <div>
-                                    <form action="/admin/flashcards/<%=card._id%>/edit" method="GET">  
-                                    <button type="submit" >Edit</button>
-                                    </form>
-                                </div>
-                                <div>
-                                    
-                                  <form action="/admin/flashcards/<%=card._id%>?_method=DELETE" method="POST">
-                                    <button type="submit" href="#">Delete</button></form></div>
-                                  </form>
-                            </div>
+                            
                         <!-- </a> -->
                     </div>
                     <% }); %>
             </ul>
+            </div>
+        
         </div>
 
         <script>

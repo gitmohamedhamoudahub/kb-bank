@@ -4,16 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css">
   <title>Create a Book</title>
 </head>
 
 <body>
+    <div class="PageContainer">
+        <a id="btnMenuAdmin" href="/admin">Admin</a>
+        <div id="navBarMenu">
+            <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: 'flashcards'},{text: 'Quiz Park', href: 'quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
+            <% navigationLinks.forEach((lnk) => { %>
+                <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
+            <% }); %>
+            
+        </div>
   <h1>Create a New Flash Card Data!</h1>
 
-  <form action="/flashcards" method="POST">
+  <form action="/admin/flashcards" method="POST">
     <label for="Categories">Choose a Category:</label>
 
-    <select name="Categors" id="Categors">
+    <select name="category" id="category">
       <option value="HTML">HTML</option>
       <option value="CSS">CSS</option>
       <option value="JavaScript">JavaScript</option>
@@ -23,7 +33,7 @@
     <label for="name">Question:</label>
     <input type="text" name="question" id="question" />
 
-    <label for="author">Answer:</label>
+    <label for="answer">Answer:</label>
     <input type="text" name="answer" id="answer" />
 
     <button type="submit">Save Question</button>

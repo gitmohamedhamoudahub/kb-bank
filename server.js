@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 require('dotenv').config();
 const path = require('path');
+const FlashCard = require('./models/flashcard.js');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -30,15 +31,6 @@ app.use(morgan("dev")); // morgan logs status of processed requests in our conso
 app.get("/", async (req, res) => {
     res.render("home.ejs")
 });
-app.get("/flashcards", async (req, res) => {
-    res.render("home.ejs")
-});
-app.get("/quiz", async (req, res) => {
-    res.render("home.ejs")
-});
-app.get("/fact", async (req, res) => {
-    res.render("home.ejs")
-});
 
 //******************************************************* */
 // ADMIN ROUTES - Admin dashboard routes.
@@ -49,9 +41,22 @@ app.get("/admin", async (req, res) => {
 });
 
 
+
+app.get("/fact", async (req, res) => {
+    res.render("home.ejs")
+});
+
 app.get("/admin/fact", async (req, res) => {
     console.log(`Welcome to Admin Page`);
     res.render("admin/home.ejs")
+});
+
+
+//QUIZ ROUTES
+//****************************************************************************************/
+
+app.get("/quiz", async (req, res) => {
+    res.render("quiz.ejs")
 });
 
 app.get("/admin/quiz", async (req, res) => {
@@ -59,16 +64,62 @@ app.get("/admin/quiz", async (req, res) => {
     res.render("admin/quiz/index.ejs")
 });
 
-app.get("/admin/flashcards", async (req, res) => {
-    console.log(`Welcome to Admin Page`);
-    res.render("admin/flashcards/index.ejs")
+
+
+
+
+
+
+//FLASHCARDS ROUTES
+//****************************************************************************************/
+app.get("/flashcards", async (req, res) => {
+    console.log('Flashcards User Page');
+    const allFlashCards = await FlashCard.find();
+    console.log(allFlashCards.length);
+    res.render("flashcards.ejs", { flashcards: allFlashCards })
+    
 });
 
+app.get("/admin/flashcards", async (req, res) => {
+    const allFlashCards = await FlashCard.find();
+    console.log(allFlashCards.length);
+    res.render("admin/flashcards/index.ejs", { flashcards: allFlashCards })
+    
+});
+
+
+app.get("/admin/flashcards/:cardId/edit", async (req, res) => {
+    const foundCard = await FlashCard.findById(req.params.cardId)
+    console.log(foundCard)
+    res.render("admin/flashcards/edit.ejs", {
+        flashCard: foundCard,
+    });
+});
+
+
+app.post("/admin/flashcards", async (req, res) => {
+    console.log(`Adding New Flashcards`,req.body);  
+    await FlashCard.create(req.body);
+    res.redirect("../../admin/flashcards")
+})
+app.put("/admin/flashcards/:cardId", async (req, res) => {
+    console.log('PUT Data',req.params);
+    await FlashCard.findByIdAndUpdate(req.params.cardId, req.body);
+    res.redirect("../../admin/flashcards")
+});
+
+
+app.delete("/admin/flashcards/:cardId", async (req, res) => {
+    console.log('DELETE Data',req.params);
+    await FlashCard.findByIdAndDelete(req.params.cardId)
+    res.redirect("../../admin/flashcards")
+});
 
 app.get("/admin/flashcards/new", async (req, res) => {
     // console.log(`Welcome to Admin Page`);
     res.render("admin/flashcards/new.ejs")
 });
+
 // INDEX BOOK ROUTE - Renders a page with a list of our book collection
 
 // NEW BOOK ROUTE - Renders form for user to enter new book data.

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Create a Book</title>
+</head>
+
+<body>
+    <div class="PageContainer">
+        <a id="btnMenuAdmin" href="/admin">Admin</a>
+        <div id="navBarMenu">
+            <% const navigationLinks = [{text: 'Home', href: '/admin'},{text: 'Flash Cards', href: '../../../admin/flashcards'},{text: 'Quiz Park', href: 'quiz'}, {text: 'Facts Checker', href: 'admin/fact'}]; %>
+            <% navigationLinks.forEach((lnk) => { %>
+                <a id="btnMenu" href="<%= lnk.href %>"><%= lnk.text %></a>
+            <% }); %>
+            
+        </div>
+  <h1>Edit Flash Card Data!</h1>
+
+  <form action="/admin/flashcards/<%=flashCard._id%>?_method=PUT" method="POST">
+    <label for="Categories">Choose a Category:</label>
+
+    <select name="category" id="category">
+      <option value="HTML" <%  if(flashCard.category == "HTML"){ 
+        %>selected <% } %>>HTML</option>
+      <option value="CSS"<%  if(flashCard.category == "CSS"){ 
+        %>selected <% } %>>CSS</option>
+      <option value="JavaScript"<%  if(flashCard.category == "JavaScript"){ 
+        %>selected <% } %>>JavaScript</option>
+      
+    </select>
+
+    <label for="name" >Question:</label>
+    <input type="text" name="question" id="question" value="<%=flashCard.question%>"/>
+
+    <label for="answer">Answer:</label>
+    <input type="text" name="answer" id="answer" value="<%=flashCard.answer%>"/>
+
+    <button type="submit">Save Question</button>
+    <button type="button">Cancel</button>
+  </form>
+</body>
+
+</html>
