@@ -20,29 +20,29 @@
         </div>
   <h1>Create a New Quiz Data!</h1>
 
-  <form action="/admin/quiz"  id="quizForm" method="POST">
+  <form action="/admin/quiz/<%=quiz._id%>?_method=PUT" method="POST">
     <label for="question">Question:</label><br>
-    <input type="text" id="question" name="question" required><br><br>
+    <input type="text" id="question" name="question" value="<%=quiz.question%>" <br><br>
     <div>
       <!-- <label>Answer:</label><br> -->
     <label>Options:</label><br>
   </div>
     <div id="optionsContainer">
         <div>
-            <input type="radio" name="answerIndex" value="1" required> 
-            <input type="text" name="options1" required>
+            <input type="radio" name="answerIndex" value="1" required  <% if (quiz.answerIndex === 1) { %> checked <% } %>> 
+            <input type="text" name="options1" value="<%= quiz.options[0] %>">
         </div>
         <div>
-            <input type="radio" name="answerIndex" value="2" required> 
-            <input type="text" name="options2" required>
+            <input type="radio" name="answerIndex" value="2" required  <% if (quiz.answerIndex === 2) { %> checked <% } %>> 
+            <input type="text" name="options2" value="<%=quiz.options[1]%>">
         </div>
         <div>
-            <input type="radio" name="answerIndex" value="3"> 
-            <input type="text" name="options3">
+            <input type="radio" name="answerIndex" value="3"  <% if (quiz.answerIndex === 3) { %> checked <% } %>> 
+            <input type="text" name="options3" value="<%=quiz.options[2]%>">
         </div>
         <div>
-            <input type="radio" name="answerIndex" value="4"> 
-            <input type="text" name="options4">
+            <input type="radio" name="answerIndex" value="4"  <% if (quiz.answerIndex === 4) { %> checked <% } %>> 
+            <input type="text" name="options4" value=" <%= quiz.options[3] %> ">
         </div>
         <input type="hidden" name="answers" value="options">
     </div>

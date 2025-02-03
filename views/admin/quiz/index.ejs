@@ -23,7 +23,7 @@
                     
                     <div class="addNew">
                         <div class="link">
-                    <a href="/admin/flashcards/new">
+                    <a href="/admin/quiz/new">
                         <img src="../images/add.jpg" alt="Add New Quiz Data" class="addImageIcon">
                        
                     </a>
@@ -36,11 +36,12 @@
                 </div>
             
                 <ul>
-                    <!-- <% quiz.forEach(card=> { %>
+                     <% quiz.forEach(card=> { %>
                         <div class="questionSection">
                             <!-- <a href="/flashcards/<%= card._id %>"> -->
-                               <!-- <div class="questionHeader"> <%= card.question %></div> -->
-                                <!-- <div class="questionAnswer"><%= card.options%></div> -->
+                               <div class="questionHeader"> <%= card.question %></div>
+                                <div class="questionAnswer"><%let counter = 1; card.options.forEach((item)=>{ %><br> <%=counter + '-' + item   %>  <% if(counter == card.answerIndex){%> ====> ✓✓✓<%} counter ++})%>
+                                </div>
                                 <div class="controlSection">
                                     <div>
                                         <form action="/admin/quiz/<%=card._id%>/edit" method="GET">  

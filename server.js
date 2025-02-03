@@ -62,9 +62,11 @@ app.get("/quiz", async (req, res) => {
 });
 
 app.get("/admin/quiz", async (req, res) => {
+    console.log('Quiz Index');
     const allQuiz = await Quiz.find();
     console.log(allQuiz.length);
     res.render("admin/quiz/index.ejs", { quiz: allQuiz })
+});
    
 app.get("/admin/quiz/new", async (req, res) => {
     console.log(`Welcome to Quiz Admin Page`);
@@ -82,6 +84,15 @@ app.post("/admin/quiz", async (req, res) => {
     await Quiz.create(newQuiz);
     res.redirect("../../admin/Quiz")
 })
+
+app.get("/admin/quiz/:cardId/edit", async (req, res) => {
+    console.log(`Editing Quiz Question with ID: ${req.params.cardId}`);  // log the id of the card being edited.
+    const foundQuiz = await Quiz.findById(req.params.cardId)
+    console.log(foundQuiz)
+    res.render("admin/quiz/edit.ejs", {
+        quiz: foundQuiz,
+    });
+});
 
 
 
