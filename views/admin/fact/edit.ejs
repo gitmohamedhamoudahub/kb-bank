@@ -22,19 +22,21 @@
 
   <form action="/admin/fact/<%=fact._id%>?_method=PUT" method="POST">
     <label for="fact">Fact:</label><br>
-    <input type="text" id="fact" name="fact" required><br><br>
+    <input type="text" id="fact" name="fact" value="<%= fact.fact %>" required><br><br>
     <div>
       <!-- <label>Answer:</label><br> -->
     <label>Options:</label><br>
   </div>
     <div id="optionsContainer">
         <div>
-            <input type="radio" name="isTrue"  value="1" required> 
+            <input type="radio" name="isTrue"   value="true"  required   <% if (fact.isTrue) { %> checked <% } %>
+            > 
             <label for="fact">True</label>
         </div>
         <div>
-            <input type="radio" name="isTrue" value="0" required> 
-            <label for="fact">False</label>
+            <input type="radio" name="isTrue" value="false" required   <% if (!fact.isTrue) { %> checked <% } %>
+            > 
+            <label for="fact">False </label>
         </div>
         
 
